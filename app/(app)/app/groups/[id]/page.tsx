@@ -12,9 +12,10 @@ import { redirect } from "next/navigation";
 
 type GroupPageProps = {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ settle?: string }>;
 };
 
-export default async function GroupPage({ params }: GroupPageProps) {
+export default async function GroupPage({ params, searchParams }: GroupPageProps) {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -22,6 +23,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
   }
 
   const { id } = await params;
+  const { settle } = await searchParams;
   const group = await getGroupDetail(id);
   const payerLabels = new Map(group.members.map((member) => [member.id, member.label]));
   const [expenses, balances] = await Promise.all([
@@ -41,6 +43,8 @@ export default async function GroupPage({ params }: GroupPageProps) {
           <BalanceSummary
             balances={balances}
             currentUserMemberId={currentUserMemberId}
+            groupId={group.id}
+            settleError={settle === "failed" ? "failed" : null}
           />
         </section>
 

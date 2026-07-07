@@ -14,6 +14,12 @@ export type BalanceExpense = {
   participants: BalanceExpenseParticipant[];
 };
 
+export type BalanceSettlement = {
+  from_group_member_id: string;
+  to_group_member_id: string;
+  amount_cents: number;
+};
+
 export type NetBalance = {
   memberId: string;
   netCents: number;
@@ -28,6 +34,7 @@ export type BalanceTransfer = {
 export function calculateNetBalances(
   members: BalanceMember[],
   expenses: BalanceExpense[],
+  settlements: BalanceSettlement[] = [],
 ): NetBalance[] {
   const totals = new Map<string, number>();
 
@@ -48,6 +55,19 @@ export function calculateNetBalances(
           participant.amount_cents,
       );
     }
+  }
+
+  for (const settlement of settlements) {
+    totals.set(
+      settlement.from_group_member_id,
+      (totals.get(settlement.from_group_member_id) ?? 0) +
+        settlement.amount_cents,
+    );
+    totals.set(
+      settlement.to_group_member_id,
+      (totals.get(settlement.to_group_member_id) ?? 0) -
+        settlement.amount_cents,
+    );
   }
 
   return members.map((member) => ({

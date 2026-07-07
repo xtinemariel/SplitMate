@@ -46,8 +46,8 @@ export type ExpenseParticipant = {
 export type Settlement = {
   id: string;
   group_id: string;
-  from_user_id: string;
-  to_user_id: string;
+  from_group_member_id: string;
+  to_group_member_id: string;
   amount_cents: number;
   note: string | null;
   settled_at: string;

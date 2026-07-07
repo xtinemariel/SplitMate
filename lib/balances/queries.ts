@@ -4,6 +4,7 @@ import {
   simplifyBalances,
   type BalanceMember,
   type BalanceExpense,
+  type BalanceSettlement,
 } from "@/lib/balances/calculate";
 import type { GroupMemberWithLabel } from "@/lib/groups/queries";
 
@@ -51,6 +52,15 @@ export async function getGroupBalances(
     participantRows = participants ?? [];
   }
 
+  const { data: settlements, error: settlementsError } = await insforge.database
+    .from("settlements")
+    .select("from_group_member_id, to_group_member_id, amount_cents")
+    .eq("group_id", groupId);
+
+  if (settlementsError) {
+    throw new Error(settlementsError.message ?? "Failed to load balances");
+  }
+
   const participantsByExpense = new Map<
     string,
     Array<{ group_member_id: string; amount_cents: number }>
@@ -73,12 +83,24 @@ export async function getGroupBalances(
     }),
   );
 
+  const normalizedSettlements: BalanceSettlement[] = (settlements ?? []).map(
+    (settlement) => ({
+      from_group_member_id: settlement.from_group_member_id,
+      to_group_member_id: settlement.to_group_member_id,
+      amount_cents: settlement.amount_cents,
+    }),
+  );
+
   const memberBalances: BalanceMember[] = members.map((member) => ({
     id: member.id,
     label: member.label,
   }));
 
-  const netBalances = calculateNetBalances(memberBalances, normalizedExpenses);
+  const netBalances = calculateNetBalances(
+    memberBalances,
+    normalizedExpenses,
+    normalizedSettlements,
+  );
   const simplified = simplifyBalances(netBalances);
   const labelById = new Map(members.map((member) => [member.id, member.label]));
 
