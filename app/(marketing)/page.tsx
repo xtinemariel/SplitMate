@@ -1,7 +1,13 @@
+import Link from "next/link";
+
 import { getBackendStatus } from "@/lib/insforge/status";
+import { getCurrentUser } from "@/lib/auth/session";
 
 export default async function HomePage() {
-  const backend = await getBackendStatus();
+  const [backend, user] = await Promise.all([
+    getBackendStatus(),
+    getCurrentUser(),
+  ]);
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center px-6 py-16">
@@ -16,6 +22,33 @@ export default async function HomePage() {
           A minimalist Splitwise alternative. Fast, minimal, and built for
           friends, roommates, and travel groups.
         </p>
+
+        <div className="flex flex-wrap gap-3">
+          {user ? (
+            <Link
+              href="/app"
+              className="inline-flex h-11 items-center rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-800"
+            >
+              Open app
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="inline-flex h-11 items-center rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-800"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signup"
+                className="inline-flex h-11 items-center rounded-lg border border-zinc-200 bg-white px-5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50"
+              >
+                Create account
+              </Link>
+            </>
+          )}
+        </div>
+
         <div className="rounded-xl border border-zinc-200 bg-white p-4 text-sm">
           <p className="font-medium text-zinc-900">Backend status</p>
           <p
