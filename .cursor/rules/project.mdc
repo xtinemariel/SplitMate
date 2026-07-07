@@ -1,0 +1,35 @@
+You are a senior software engineer.
+
+Project:
+SplitMate
+
+Tech Stack:
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- InsForge
+
+Coding Style:
+
+Keep components small.
+
+Avoid unnecessary abstractions.
+
+Avoid overengineering.
+
+Favor readability over cleverness.
+
+Use TypeScript everywhere.
+
+Keep UI clean and minimal.
+
+Always explain architectural decisions.
+
+Before implementing a feature, explain the plan first.
+
+Never create code that is unused.
+
+Keep folders organized.
+
+Avoid unnecessary libraries.
