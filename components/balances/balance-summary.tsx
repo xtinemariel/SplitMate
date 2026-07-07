@@ -36,7 +36,6 @@ export function BalanceSummary({
         {balances.map((balance) => {
           const fromIsYou = balance.fromMemberId === currentUserMemberId;
           const toIsYou = balance.toMemberId === currentUserMemberId;
-          const showSettleButton = fromIsYou || toIsYou;
 
           const sentence = fromIsYou
             ? `You owe ${balance.toLabel} ${formatCents(balance.amountCents)}`
@@ -52,32 +51,30 @@ export function BalanceSummary({
               <div className="space-y-3">
                 <p className="text-sm text-zinc-900">{sentence}</p>
 
-                {showSettleButton ? (
-                  <form action={settleUp} className="flex justify-end">
-                    <input type="hidden" name="groupId" value={groupId} />
-                    <input
-                      type="hidden"
-                      name="fromGroupMemberId"
-                      value={balance.fromMemberId}
-                    />
-                    <input
-                      type="hidden"
-                      name="toGroupMemberId"
-                      value={balance.toMemberId}
-                    />
-                    <input
-                      type="hidden"
-                      name="amountCents"
-                      value={balance.amountCents}
-                    />
-                    <button
-                      type="submit"
-                      className="inline-flex h-9 items-center rounded-lg border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
-                    >
-                      Settle up
-                    </button>
-                  </form>
-                ) : null}
+                <form action={settleUp} className="flex justify-end">
+                  <input type="hidden" name="groupId" value={groupId} />
+                  <input
+                    type="hidden"
+                    name="fromGroupMemberId"
+                    value={balance.fromMemberId}
+                  />
+                  <input
+                    type="hidden"
+                    name="toGroupMemberId"
+                    value={balance.toMemberId}
+                  />
+                  <input
+                    type="hidden"
+                    name="amountCents"
+                    value={balance.amountCents}
+                  />
+                  <button
+                    type="submit"
+                    className="inline-flex h-9 items-center rounded-lg border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+                  >
+                    Mark as settled
+                  </button>
+                </form>
               </div>
             </li>
           );

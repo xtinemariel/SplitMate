@@ -1,6 +1,7 @@
 import { AppHeader } from "@/components/app/app-header";
 import { AddMemberForm } from "@/components/groups/add-member-form";
 import { BalanceSummary } from "@/components/balances/balance-summary";
+import { SettlementHistory } from "@/components/balances/settlement-history";
 import { CreateExpenseForm } from "@/components/expenses/create-expense-form";
 import { ExpenseList } from "@/components/expenses/expense-list";
 import { MemberList } from "@/components/groups/member-list";
@@ -8,6 +9,7 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { getGroupBalances } from "@/lib/balances/queries";
 import { getExpensesForGroup } from "@/lib/expenses/queries";
 import { getGroupDetail } from "@/lib/groups/queries";
+import { getSettlementHistory } from "@/lib/settlements/queries";
 import { redirect } from "next/navigation";
 
 type GroupPageProps = {
@@ -26,9 +28,10 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
   const { settle } = await searchParams;
   const group = await getGroupDetail(id);
   const payerLabels = new Map(group.members.map((member) => [member.id, member.label]));
-  const [expenses, balances] = await Promise.all([
+  const [expenses, balances, settlementHistory] = await Promise.all([
     getExpensesForGroup(id, payerLabels),
     getGroupBalances(id, group.members),
+    getSettlementHistory(id, group.members),
   ]);
   const currentUserMemberId = group.members.find((member) => member.user_id === user.id)?.id ?? "";
 
@@ -45,6 +48,16 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
             currentUserMemberId={currentUserMemberId}
             groupId={group.id}
             settleError={settle === "failed" ? "failed" : null}
+          />
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+            Settlement history
+          </h2>
+          <SettlementHistory
+            items={settlementHistory}
+            currentUserMemberId={currentUserMemberId}
           />
         </section>
 
