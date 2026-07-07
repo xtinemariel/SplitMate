@@ -19,8 +19,7 @@ export default async function HomePage() {
           SplitMate
         </h1>
         <p className="text-lg leading-8 text-zinc-600">
-          A minimalist Splitwise alternative. Fast, minimal, and built for
-          friends, roommates, and travel groups.
+        Split expenses. See balances. Settle up. Nothing more than you need.
         </p>
 
         <div className="flex flex-wrap gap-3">

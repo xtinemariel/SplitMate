@@ -10,6 +10,7 @@ import { createInsForgeServerClient } from "@/lib/insforge/server";
 export type ExpenseFormState = {
   error?: string;
   success?: string;
+  submissionId?: string;
 };
 
 export async function createExpense(
@@ -76,5 +77,8 @@ export async function createExpense(
 
   revalidatePath(`/app/groups/${groupId}`);
 
-  return { success: "Expense added." };
+  return {
+    success: "Expense added.",
+    submissionId: crypto.randomUUID(),
+  };
 }

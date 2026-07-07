@@ -1,9 +1,6 @@
-const requiredPublicEnv = [
-  "NEXT_PUBLIC_INSFORGE_URL",
-  "NEXT_PUBLIC_INSFORGE_ANON_KEY",
-] as const;
-
-type PublicEnvKey = (typeof requiredPublicEnv)[number];
+type PublicEnvKey =
+  | "NEXT_PUBLIC_INSFORGE_URL"
+  | "NEXT_PUBLIC_INSFORGE_ANON_KEY";
 
 function readPublicEnv(key: PublicEnvKey): string {
   const value = process.env[key]?.trim();

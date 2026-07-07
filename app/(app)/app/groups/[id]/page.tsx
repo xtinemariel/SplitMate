@@ -86,7 +86,11 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
             Members
           </h2>
-          <MemberList members={group.members} currentUserId={user.id} />
+          <MemberList
+            members={group.members}
+            currentUserId={user.id}
+            groupId={group.id}
+          />
         </section>
 
         <section className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-4">
