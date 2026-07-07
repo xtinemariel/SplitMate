@@ -27,7 +27,7 @@ export type GroupMember = {
 export type Expense = {
   id: string;
   group_id: string;
-  paid_by: string;
+  paid_by_group_member_id: string;
   amount_cents: number;
   description: string;
   expense_date: string;
@@ -39,7 +39,7 @@ export type Expense = {
 export type ExpenseParticipant = {
   id: string;
   expense_id: string;
-  user_id: string;
+  group_member_id: string;
   amount_cents: number;
 };
 
