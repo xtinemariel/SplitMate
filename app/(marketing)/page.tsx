@@ -48,6 +48,7 @@ export default async function HomePage() {
           )}
         </div>
 
+    {/*
         <div className="rounded-xl border border-zinc-200 bg-white p-4 text-sm">
           <p className="font-medium text-zinc-900">Backend status</p>
           <p
@@ -58,6 +59,7 @@ export default async function HomePage() {
             {backend.message}
           </p>
         </div>
+        */}
       </div>
     </main>
   );

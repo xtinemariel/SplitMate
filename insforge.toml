@@ -3,6 +3,11 @@ allowed_redirect_urls = [
   "http://localhost:3000/api/auth/callback",
   "http://localhost:3000/login",
   "http://localhost:3000/signup",
+
+   # Production (Vercel)
+  "https://split-mate-6svgjhq5k-xtinemariel.vercel.app/api/auth/callback",
+  "https://split-mate-6svgjhq5k-xtinemariel.vercel.app/login",
+  "https://split-mate-6svgjhq5k-xtinemariel.vercel.app/signup",
 ]
 require_email_verification = true
 verify_email_method = "code"
