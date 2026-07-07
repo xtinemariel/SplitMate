@@ -1,32 +1,47 @@
-import { signOut } from "@/lib/auth/actions";
-import { getCurrentUser } from "@/lib/auth/session";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default async function AppPlaceholderPage() {
+import { AppHeader } from "@/components/app/app-header";
+import { GroupList } from "@/components/groups/group-list";
+import { ensureProfile } from "@/lib/profiles/ensure";
+import { getGroupsForCurrentUser } from "@/lib/groups/queries";
+import { getCurrentUser } from "@/lib/auth/session";
+import { redirect } from "next/navigation";
+
+export default async function GroupsPage() {
   const user = await getCurrentUser();
 
+  if (!user) {
+    redirect("/login");
+  }
+
+  await ensureProfile(user);
+  const groups = await getGroupsForCurrentUser();
+
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-900">
-          You&apos;re signed in
-        </h1>
-        <p className="mt-2 text-sm text-zinc-600">
-          Expense features are coming next. For now, this confirms authentication
-          is working.
-        </p>
-      </div>
+    <>
+      <AppHeader />
+      <main className="mx-auto w-full max-w-lg flex-1 px-4 py-6">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-zinc-900">
+              Groups
+            </h1>
+            <p className="mt-1 text-sm text-zinc-600">
+              Your shared expense groups
+            </p>
+          </div>
+          {groups.length > 0 ? (
+            <Link
+              href="/app/groups/new"
+              className="inline-flex h-10 shrink-0 items-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-800"
+            >
+              New
+            </Link>
+          ) : null}
+        </div>
 
-      <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-sm">
-        <p className="font-medium text-zinc-900">Account</p>
-        <p className="mt-1 text-zinc-600">{user?.email}</p>
-      </div>
-
-      <form action={signOut}>
-        <Button type="submit" variant="secondary" className="w-auto px-5">
-          Sign out
-        </Button>
-      </form>
-    </div>
+        <GroupList groups={groups} />
+      </main>
+    </>
   );
 }
