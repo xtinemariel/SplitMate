@@ -15,9 +15,9 @@ export function BalanceSummary({
 }) {
   if (balances.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-8 text-center">
-        <p className="text-sm font-medium text-zinc-900">All settled up</p>
-        <p className="mt-2 text-sm text-zinc-600">
+      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
+        <p className="text-sm font-medium text-foreground">All settled up</p>
+        <p className="mt-2 text-sm text-muted-foreground">
           No one owes anything right now.
         </p>
       </div>
@@ -32,7 +32,7 @@ export function BalanceSummary({
         </p>
       ) : null}
 
-      <ul className="divide-y divide-zinc-200 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+      <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
         {balances.map((balance) => {
           const fromIsYou = balance.fromMemberId === currentUserMemberId;
           const toIsYou = balance.toMemberId === currentUserMemberId;
@@ -49,7 +49,7 @@ export function BalanceSummary({
               className="px-4 py-4"
             >
               <div className="space-y-3">
-                <p className="text-sm text-zinc-900">{sentence}</p>
+                <p className="text-sm text-foreground">{sentence}</p>
 
                 <form action={settleUp} className="flex justify-end">
                   <input type="hidden" name="groupId" value={groupId} />
@@ -70,7 +70,7 @@ export function BalanceSummary({
                   />
                   <button
                     type="submit"
-                    className="inline-flex h-9 items-center rounded-lg border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+                    className="inline-flex h-9 items-center rounded-lg border border-border bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
                   >
                     Mark as settled
                   </button>

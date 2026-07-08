@@ -11,7 +11,7 @@ export function MemberList({
   groupId: string;
 }) {
   return (
-    <ul className="divide-y divide-zinc-200 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
       {members.map((member) => (
         <MemberRow
           key={`${member.id}:${member.label}`}

@@ -40,7 +40,7 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
       <AppHeader backHref="/app" title={group.name} />
       <main className="mx-auto w-full max-w-lg flex-1 space-y-8 px-4 py-6">
         <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Balances
           </h2>
           <BalanceSummary
@@ -52,7 +52,7 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Settlement history
           </h2>
           <SettlementHistory
@@ -62,16 +62,16 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Expenses
           </h2>
           <ExpenseList expenses={expenses} />
         </section>
 
-        <section className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-4">
+        <section className="space-y-4 rounded-2xl border border-border bg-card p-4">
           <div>
-            <h2 className="text-sm font-medium text-zinc-900">Add expense</h2>
-            <p className="mt-1 text-xs text-zinc-500">
+            <h2 className="text-sm font-medium text-foreground">Add expense</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
               Any group member can be selected as payer or participant.
             </p>
           </div>
@@ -83,7 +83,7 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Members
           </h2>
           <MemberList
@@ -93,8 +93,8 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           />
         </section>
 
-        <section className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-4">
-          <h2 className="text-sm font-medium text-zinc-900">Add someone</h2>
+        <section className="space-y-4 rounded-2xl border border-border bg-card p-4">
+          <h2 className="text-sm font-medium text-foreground">Add someone</h2>
           <AddMemberForm groupId={group.id} />
         </section>
       </main>

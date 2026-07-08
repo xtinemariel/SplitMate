@@ -105,10 +105,10 @@ export function MemberRow({
               ) : null}
             </form>
           ) : (
-            <p className="truncate font-medium text-zinc-900">
+            <p className="truncate font-medium text-foreground">
               {member.label}
               {member.user_id && member.user_id === currentUserId ? (
-                <span className="ml-2 text-sm font-normal text-zinc-500">
+                <span className="ml-2 text-sm font-normal text-muted-foreground">
                   (you)
                 </span>
               ) : null}
@@ -117,7 +117,7 @@ export function MemberRow({
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium capitalize text-zinc-600">
+          <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-medium capitalize text-accent-foreground">
             {member.role}
           </span>
           {!isEditing ? (

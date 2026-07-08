@@ -26,9 +26,9 @@ export function SettlementHistory({
 }) {
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-8 text-center">
-        <p className="text-sm font-medium text-zinc-900">No settlements yet</p>
-        <p className="mt-2 text-sm text-zinc-600">
+      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
+        <p className="text-sm font-medium text-foreground">No settlements yet</p>
+        <p className="mt-2 text-sm text-muted-foreground">
           Mark a balance as settled to see it here.
         </p>
       </div>
@@ -36,7 +36,7 @@ export function SettlementHistory({
   }
 
   return (
-    <ul className="divide-y divide-zinc-200 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
       {items.map((item) => {
         const fromIsYou = item.fromMemberId === currentUserMemberId;
         const toIsYou = item.toMemberId === currentUserMemberId;
@@ -50,11 +50,11 @@ export function SettlementHistory({
         return (
           <li key={item.id} className="px-4 py-4">
             <div className="space-y-1">
-              <p className="text-sm text-zinc-900">
+              <p className="text-sm text-foreground">
                 <span className="font-medium">{sentence}</span>{" "}
                 <span className="font-semibold">{item.formattedAmount}</span>
               </p>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-muted-foreground">
                 {formatSettlementDate(item.settledAt)}
               </p>
             </div>

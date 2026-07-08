@@ -182,7 +182,7 @@ export function CreateExpenseForm({
 
   if (members.length === 0) {
     return (
-      <p className="text-sm text-zinc-600">
+      <p className="text-sm text-muted-foreground">
         Add at least one member to record expenses.
       </p>
     );
@@ -479,7 +479,7 @@ function ExpenseFormFields({
           value={values.paidByGroupMemberId}
           onChange={(event) => handlePaidByChange(event.target.value)}
           onBlur={handlePaidByBlur}
-          className="h-11 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900 outline-none focus:border-zinc-400"
+          className="h-11 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           required
         >
           {members.map((member) => (
@@ -499,34 +499,34 @@ function ExpenseFormFields({
           <button
             type="button"
             onClick={toggleAllParticipants}
-            className="text-xs font-medium text-zinc-600 transition-colors hover:text-zinc-900"
+            className="rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
           >
             {allSelected ? "Clear all" : "Select all"}
           </button>
         </div>
 
-        <ul className="divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
+        <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border">
           {members.map((member) => {
             const checked = values.selectedParticipants.includes(member.id);
 
             return (
               <li key={member.id}>
-                <label className="flex cursor-pointer items-center gap-3 px-4 py-3">
+                <label className="flex cursor-pointer items-center gap-3 px-4 py-3 transition-colors hover:bg-accent has-[:checked]:bg-accent has-[:checked]:text-accent-foreground">
                   <input
                     type="checkbox"
                     name="participants"
                     value={member.id}
                     checked={checked}
                     onChange={() => toggleParticipant(member.id)}
-                    className="h-4 w-4 rounded border-zinc-300"
+                    className="h-4 w-4 rounded border-border accent-primary"
                   />
-                  <span className="text-sm text-zinc-900">{member.label}</span>
+                  <span className="text-sm text-foreground">{member.label}</span>
                 </label>
               </li>
             );
           })}
         </ul>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-muted-foreground">
           Split equally among selected members.
         </p>
         {touched.participants && errors.participants ? (

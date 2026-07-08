@@ -35,7 +35,7 @@ export function AddMemberForm({ groupId }: { groupId: string }) {
           autoComplete="off"
           required
         />
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-muted-foreground">
           No account needed — just add their name for now.
         </p>
       </div>

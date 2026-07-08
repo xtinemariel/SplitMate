@@ -22,10 +22,10 @@ export function CreateGroupForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
           New group
         </h1>
-        <p className="mt-2 text-sm text-zinc-600">
+        <p className="mt-2 text-sm text-muted-foreground">
           Roommates, trips, dinners — keep it simple.
         </p>
       </div>
@@ -55,7 +55,7 @@ export function CreateGroupForm() {
 
       <Link
         href="/app"
-        className="inline-block text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900"
+        className="inline-block text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         Cancel
       </Link>

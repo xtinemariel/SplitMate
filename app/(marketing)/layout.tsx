@@ -16,26 +16,26 @@ export default async function MarketingLayout({
   const user = await getCurrentUser();
 
   return (
-    <div className="flex min-h-full flex-col bg-zinc-50 text-zinc-900">
-      <header className="border-b border-zinc-200 bg-white">
+    <div className="flex min-h-full flex-col bg-background text-foreground">
+      <header className="border-b border-border bg-background">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
           <Link
             href="/"
-            className="text-sm font-semibold tracking-tight text-zinc-900"
+            className="text-sm font-semibold tracking-tight text-foreground"
           >
             SplitMate
           </Link>
           {user ? (
             <Link
               href="/app"
-              className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Open app
             </Link>
           ) : (
             <Link
               href="/login"
-              className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Sign in
             </Link>

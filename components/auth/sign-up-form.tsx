@@ -39,7 +39,7 @@ export function SignUpForm() {
         footer={
           <>
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-zinc-900">
+            <Link href="/login" className="font-medium text-foreground">
               Sign in
             </Link>
           </>
@@ -81,7 +81,7 @@ export function SignUpForm() {
       footer={
         <>
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-zinc-900">
+          <Link href="/login" className="font-medium text-foreground">
             Sign in
           </Link>
         </>
@@ -92,10 +92,10 @@ export function SignUpForm() {
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-zinc-200" />
+            <span className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center text-xs uppercase tracking-wide">
-            <span className="bg-white px-2 text-zinc-500">or</span>
+            <span className="bg-card px-2 text-muted-foreground">or</span>
           </div>
         </div>
 

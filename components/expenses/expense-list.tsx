@@ -11,9 +11,9 @@ function formatExpenseDate(date: string) {
 export function ExpenseList({ expenses }: { expenses: ExpenseWithMeta[] }) {
   if (expenses.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-8 text-center">
-        <p className="text-sm font-medium text-zinc-900">No expenses yet</p>
-        <p className="mt-2 text-sm text-zinc-600">
+      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
+        <p className="text-sm font-medium text-foreground">No expenses yet</p>
+        <p className="mt-2 text-sm text-muted-foreground">
           Add your first expense below.
         </p>
       </div>
@@ -21,22 +21,22 @@ export function ExpenseList({ expenses }: { expenses: ExpenseWithMeta[] }) {
   }
 
   return (
-    <ul className="divide-y divide-zinc-200 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
       {expenses.map((expense) => (
         <li key={expense.id} className="px-4 py-4">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <p className="truncate font-medium text-zinc-900">
+              <p className="truncate font-medium text-foreground">
                 {expense.description}
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
+              <p className="mt-1 text-sm text-muted-foreground">
                 {expense.payer_label} paid · {formatExpenseDate(expense.expense_date)}
               </p>
-              <p className="mt-1 text-xs text-zinc-500">
+              <p className="mt-1 text-xs text-muted-foreground">
                 Split {expense.participant_count} {expense.participant_count === 1 ? "way" : "ways"}
               </p>
             </div>
-            <p className="shrink-0 text-sm font-semibold text-zinc-900">
+            <p className="shrink-0 text-sm font-semibold text-foreground">
               {expense.formatted_amount}
             </p>
           </div>
