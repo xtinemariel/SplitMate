@@ -4,6 +4,10 @@ import { BalanceSummary } from "@/components/balances/balance-summary";
 import { SettlementHistory } from "@/components/balances/settlement-history";
 import { CreateExpenseForm } from "@/components/expenses/create-expense-form";
 import { ExpenseList } from "@/components/expenses/expense-list";
+import {
+  buildGroupExpenseSummary,
+  GroupSummary,
+} from "@/components/groups/group-summary";
 import { MemberList } from "@/components/groups/member-list";
 import { surfaceCardClass } from "@/components/ui/surface";
 import { getCurrentUser } from "@/lib/auth/session";
@@ -35,11 +39,19 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
     getSettlementHistory(id, group.members),
   ]);
   const currentUserMemberId = group.members.find((member) => member.user_id === user.id)?.id ?? "";
+  const groupSummary = buildGroupExpenseSummary(group.members, expenses);
 
   return (
     <>
       <AppHeader backHref="/app" title={group.name} />
       <main className="mx-auto w-full max-w-lg flex-1 space-y-8 px-4 py-6">
+        <section className="space-y-3">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+            Group summary
+          </h2>
+          <GroupSummary summary={groupSummary} />
+        </section>
+
         <section className="space-y-3">
           <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Balances

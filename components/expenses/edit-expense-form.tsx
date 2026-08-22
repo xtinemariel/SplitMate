@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 
 import { ExpenseForm } from "@/components/expenses/expense-form";
 import { Button } from "@/components/ui/button";
@@ -93,7 +93,9 @@ function DeleteExpenseForm({
     formData.set("groupId", groupId);
     formData.set("expenseId", expenseId);
 
-    void formAction(formData);
+    startTransition(() => {
+      formAction(formData);
+    });
   }
 
   return (

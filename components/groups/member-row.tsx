@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,7 +45,9 @@ export function MemberRow({
     formData.set("memberId", member.id);
     formData.set("name", name.trim());
 
-    void editAction(formData);
+    startTransition(() => {
+      editAction(formData);
+    });
   }
 
   function handleDeleteSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -64,7 +66,9 @@ export function MemberRow({
     formData.set("groupId", groupId);
     formData.set("memberId", member.id);
 
-    void deleteAction(formData);
+    startTransition(() => {
+      deleteAction(formData);
+    });
   }
 
   return (
