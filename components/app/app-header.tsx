@@ -11,7 +11,7 @@ export function AppHeader({
   backHref?: string;
 }) {
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-10 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-lg items-center justify-between px-4">
         <div className="flex min-w-0 items-center gap-3">
           {backHref ? (

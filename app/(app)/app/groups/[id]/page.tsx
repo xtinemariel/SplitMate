@@ -5,6 +5,7 @@ import { SettlementHistory } from "@/components/balances/settlement-history";
 import { CreateExpenseForm } from "@/components/expenses/create-expense-form";
 import { ExpenseList } from "@/components/expenses/expense-list";
 import { MemberList } from "@/components/groups/member-list";
+import { surfaceCardClass } from "@/components/ui/surface";
 import { getCurrentUser } from "@/lib/auth/session";
 import { getGroupBalances } from "@/lib/balances/queries";
 import { getExpensesForGroup } from "@/lib/expenses/queries";
@@ -53,7 +54,7 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
 
         <section className="space-y-3">
           <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            Settlement history
+            Payment history
           </h2>
           <SettlementHistory
             items={settlementHistory}
@@ -65,10 +66,10 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Expenses
           </h2>
-          <ExpenseList expenses={expenses} />
+          <ExpenseList expenses={expenses} groupId={group.id} />
         </section>
 
-        <section className="space-y-4 rounded-2xl border border-border bg-card p-4">
+        <section className={surfaceCardClass("peach", "space-y-4 p-4") }>
           <div>
             <h2 className="text-sm font-medium text-foreground">Add expense</h2>
             <p className="mt-1 text-xs text-muted-foreground">
@@ -93,7 +94,7 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           />
         </section>
 
-        <section className="space-y-4 rounded-2xl border border-border bg-card p-4">
+        <section className={surfaceCardClass("yellow", "space-y-4 p-4") }>
           <h2 className="text-sm font-medium text-foreground">Add someone</h2>
           <AddMemberForm groupId={group.id} />
         </section>

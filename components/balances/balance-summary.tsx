@@ -1,6 +1,11 @@
 import { formatCents } from "@/lib/expenses/money";
+import {
+  surfaceCardClass,
+  surfaceListDivideClass,
+} from "@/components/ui/surface";
 import { settleUp } from "@/lib/settlements/actions";
 import type { BalanceLine } from "@/lib/balances/queries";
+import { cn } from "@/lib/utils";
 
 export function BalanceSummary({
   balances,
@@ -15,7 +20,7 @@ export function BalanceSummary({
 }) {
   if (balances.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
+      <div className={surfaceCardClass("mint", "px-6 py-8 text-center")}>
         <p className="text-sm font-medium text-foreground">All settled up</p>
         <p className="mt-2 text-sm text-muted-foreground">
           No one owes anything right now.
@@ -27,12 +32,17 @@ export function BalanceSummary({
   return (
     <div className="space-y-3">
       {settleError ? (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
           Could not settle up. Please try again.
         </p>
       ) : null}
 
-      <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+      <ul
+        className={surfaceCardClass(
+          "mint",
+          cn("overflow-hidden", surfaceListDivideClass),
+        )}
+      >
         {balances.map((balance) => {
           const fromIsYou = balance.fromMemberId === currentUserMemberId;
           const toIsYou = balance.toMemberId === currentUserMemberId;
@@ -72,7 +82,7 @@ export function BalanceSummary({
                     type="submit"
                     className="inline-flex h-9 items-center rounded-lg border border-border bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
                   >
-                    Mark as settled
+                    Mark as paid
                   </button>
                 </form>
               </div>

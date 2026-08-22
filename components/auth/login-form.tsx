@@ -44,13 +44,10 @@ export function LoginForm({
       <div className="space-y-6">
         <GoogleSignInButton />
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase tracking-wide">
-            <span className="bg-card px-2 text-muted-foreground">or</span>
-          </div>
+        <div className="flex items-center justify-center">
+          <span className="rounded-full bg-[#F4F1FF] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            or
+          </span>
         </div>
 
         <form action={formAction} className="space-y-4">
@@ -81,7 +78,7 @@ export function LoginForm({
           </div>
 
           {error ? (
-            <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
               {error}
             </p>
           ) : null}

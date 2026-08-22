@@ -1,5 +1,10 @@
 import type { GroupMemberWithLabel } from "@/lib/groups/queries";
+import {
+  surfaceCardClass,
+  surfaceListDivideClass,
+} from "@/components/ui/surface";
 import { MemberRow } from "@/components/groups/member-row";
+import { cn } from "@/lib/utils";
 
 export function MemberList({
   members,
@@ -11,7 +16,12 @@ export function MemberList({
   groupId: string;
 }) {
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+    <ul
+      className={surfaceCardClass(
+        "neutral",
+        cn("overflow-hidden", surfaceListDivideClass),
+      )}
+    >
       {members.map((member) => (
         <MemberRow
           key={`${member.id}:${member.label}`}

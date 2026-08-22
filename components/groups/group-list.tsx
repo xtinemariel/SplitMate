@@ -1,6 +1,11 @@
 import Link from "next/link";
 
 import type { GroupSummary } from "@/lib/groups/queries";
+import {
+  surfaceCardClass,
+  surfaceListDivideClass,
+} from "@/components/ui/surface";
+import { cn } from "@/lib/utils";
 
 function memberLabel(count: number) {
   return count === 1 ? "1 member" : `${count} members`;
@@ -9,7 +14,7 @@ function memberLabel(count: number) {
 export function GroupList({ groups }: { groups: GroupSummary[] }) {
   if (groups.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-10 text-center">
+      <div className={surfaceCardClass("peach", "px-6 py-10 text-center")}>
         <p className="text-sm font-medium text-foreground">No groups yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
           Create a group to start splitting expenses with friends.
@@ -25,7 +30,12 @@ export function GroupList({ groups }: { groups: GroupSummary[] }) {
   }
 
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+    <ul
+      className={surfaceCardClass(
+        "peach",
+        cn("overflow-hidden", surfaceListDivideClass),
+      )}
+    >
       {groups.map((group) => (
         <li key={group.id}>
           <Link

@@ -41,13 +41,13 @@ export function AddMemberForm({ groupId }: { groupId: string }) {
       </div>
 
       {state.error ? (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
           {state.error}
         </p>
       ) : null}
 
       {state.success ? (
-        <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+        <p className="rounded-[18px] bg-[#ECFDF5] px-3 py-2 text-sm text-[#2E6B51]">
           {state.success}
         </p>
       ) : null}

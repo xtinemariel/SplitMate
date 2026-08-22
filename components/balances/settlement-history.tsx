@@ -1,3 +1,9 @@
+import {
+  surfaceCardClass,
+  surfaceListDivideClass,
+} from "@/components/ui/surface";
+import { cn } from "@/lib/utils";
+
 type SettlementHistoryItem = {
   id: string;
   fromMemberId: string;
@@ -26,26 +32,31 @@ export function SettlementHistory({
 }) {
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
-        <p className="text-sm font-medium text-foreground">No settlements yet</p>
+      <div className={surfaceCardClass("blue", "px-6 py-8 text-center")}>
+        <p className="text-sm font-medium text-foreground">No payments yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Mark a balance as settled to see it here.
+        Payments you mark as paid will show up here.
         </p>
       </div>
     );
   }
 
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+    <ul
+      className={surfaceCardClass(
+        "blue",
+        cn("overflow-hidden", surfaceListDivideClass),
+      )}
+    >
       {items.map((item) => {
         const fromIsYou = item.fromMemberId === currentUserMemberId;
         const toIsYou = item.toMemberId === currentUserMemberId;
 
         const sentence = fromIsYou
-          ? `You settled with ${item.toLabel}`
+          ? `You paid ${item.toLabel}`
           : toIsYou
-            ? `${item.fromLabel} settled with you`
-            : `${item.fromLabel} settled with ${item.toLabel}`;
+            ? `${item.fromLabel} paid you`
+            : `${item.fromLabel} paid ${item.toLabel}`;
 
         return (
           <li key={item.id} className="px-4 py-4">

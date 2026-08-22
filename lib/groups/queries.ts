@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { getMemberLabel } from "@/lib/profiles/ensure";
 import { createInsForgeServerClient } from "@/lib/insforge/server";
@@ -42,20 +42,23 @@ export async function getGroupsForCurrentUser(): Promise<GroupSummary[]> {
 export async function getGroupDetail(groupId: string): Promise<GroupDetail> {
   const user = await getCurrentUser();
   if (!user) {
-    notFound();
+    redirect("/login");
   }
 
   const insforge = await createInsForgeServerClient();
 
-  const { data: group, error: groupError } = await insforge.database
+  // Prefer limit(1) over maybeSingle(); object-mode reads can return empty via InsForge.
+  const { data: groups, error: groupError } = await insforge.database
     .from("groups")
     .select("id, name, created_by, created_at, updated_at")
     .eq("id", groupId)
-    .maybeSingle();
+    .limit(1);
 
   if (groupError) {
     throw new Error(groupError.message ?? "Failed to load group");
   }
+
+  const group = groups?.[0];
 
   if (!group) {
     notFound();

@@ -16,7 +16,7 @@ export function Button({
         variant === "primary" &&
           "bg-primary text-primary-foreground hover:bg-primary/90",
         variant === "secondary" &&
-          "border border-border bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
         variant === "ghost" && "text-foreground hover:bg-accent hover:text-accent-foreground",
         className,
       )}

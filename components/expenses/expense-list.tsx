@@ -1,4 +1,11 @@
+import Link from "next/link";
+
 import type { ExpenseWithMeta } from "@/lib/expenses/queries";
+import {
+  surfaceCardClass,
+  surfaceListDivideClass,
+} from "@/components/ui/surface";
+import { cn } from "@/lib/utils";
 
 function formatExpenseDate(date: string) {
   return new Intl.DateTimeFormat("en-US", {
@@ -8,10 +15,16 @@ function formatExpenseDate(date: string) {
   }).format(new Date(`${date}T12:00:00`));
 }
 
-export function ExpenseList({ expenses }: { expenses: ExpenseWithMeta[] }) {
+export function ExpenseList({
+  expenses,
+  groupId,
+}: {
+  expenses: ExpenseWithMeta[];
+  groupId: string;
+}) {
   if (expenses.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-8 text-center">
+      <div className={surfaceCardClass("lavender", "px-6 py-8 text-center")}>
         <p className="text-sm font-medium text-foreground">No expenses yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
           Add your first expense below.
@@ -21,7 +34,12 @@ export function ExpenseList({ expenses }: { expenses: ExpenseWithMeta[] }) {
   }
 
   return (
-    <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+    <ul
+      className={surfaceCardClass(
+        "lavender",
+        cn("overflow-hidden", surfaceListDivideClass),
+      )}
+    >
       {expenses.map((expense) => (
         <li key={expense.id} className="px-4 py-4">
           <div className="flex items-start justify-between gap-4">
@@ -33,12 +51,21 @@ export function ExpenseList({ expenses }: { expenses: ExpenseWithMeta[] }) {
                 {expense.payer_label} paid · {formatExpenseDate(expense.expense_date)}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                Split {expense.participant_count} {expense.participant_count === 1 ? "way" : "ways"}
+                Split {expense.participant_count}{" "}
+                {expense.participant_count === 1 ? "way" : "ways"}
               </p>
             </div>
-            <p className="shrink-0 text-sm font-semibold text-foreground">
-              {expense.formatted_amount}
-            </p>
+            <div className="flex shrink-0 flex-col items-end gap-2">
+              <p className="text-sm font-semibold text-foreground">
+                {expense.formatted_amount}
+              </p>
+              <Link
+                href={`/app/groups/${groupId}/expenses/${expense.id}/edit`}
+                className="inline-flex h-8 items-center rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
+              >
+                Edit
+              </Link>
+            </div>
           </div>
         </li>
       ))}

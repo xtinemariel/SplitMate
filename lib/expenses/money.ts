@@ -38,3 +38,7 @@ export function formatCents(amountCents: number): string {
     currency: "PHP",
   }).format(amountCents / 100);
 }
+
+export function formatCentsAsAmountInput(amountCents: number): string {
+  return (amountCents / 100).toFixed(2);
+}

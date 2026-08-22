@@ -101,7 +101,7 @@ export function MemberRow({
                 </Button>
               </div>
               {editState.error ? (
-                <p className="text-xs text-red-700">{editState.error}</p>
+                <p className="text-xs text-[#8A6A00]">{editState.error}</p>
               ) : null}
             </form>
           ) : (
@@ -138,7 +138,7 @@ export function MemberRow({
                   type="submit"
                   variant="secondary"
                   disabled={deletePending}
-                  className="h-8 w-auto px-3 text-xs text-red-700 hover:text-red-800"
+                  className="h-8 w-auto px-3 text-xs text-[#A46A78] hover:text-[#8E5964]"
                 >
                   {deletePending ? "Removing..." : "Delete"}
                 </Button>
@@ -149,7 +149,7 @@ export function MemberRow({
       </div>
 
       {deleteState.error ? (
-        <p className="mt-2 text-xs text-red-700">{deleteState.error}</p>
+        <p className="mt-2 text-xs text-[#8A6A00]">{deleteState.error}</p>
       ) : null}
     </li>
   );

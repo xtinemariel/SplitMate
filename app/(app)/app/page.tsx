@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AppHeader } from "@/components/app/app-header";
 import { GroupList } from "@/components/groups/group-list";
+import { surfaceCardClass } from "@/components/ui/surface";
 import { ensureProfile } from "@/lib/profiles/ensure";
 import { getGroupsForCurrentUser } from "@/lib/groups/queries";
 import { getCurrentUser } from "@/lib/auth/session";
@@ -38,6 +39,17 @@ export default async function GroupsPage() {
               New
             </Link>
           ) : null}
+        </div>
+
+        <div className={surfaceCardClass("mint", "mb-4 p-4") }>
+          <p className="text-sm font-medium text-foreground">
+            {groups.length === 0
+              ? "Create a group to track shared expenses with friends, family, or colleagues."
+              : `${groups.length} active group${groups.length === 1 ? "" : "s"}`}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Everything you split together, all in one group.
+          </p>
         </div>
 
         <GroupList groups={groups} />

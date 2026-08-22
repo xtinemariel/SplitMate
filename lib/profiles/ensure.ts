@@ -26,11 +26,13 @@ export async function ensureProfile(user: AuthUser) {
 export async function getMemberLabel(userId: string, fallbackEmail?: string) {
   const insforge = await createInsForgeServerClient();
 
-  const { data: profile } = await insforge.database
+  const { data: profiles } = await insforge.database
     .from("profiles")
     .select("display_name")
     .eq("id", userId)
-    .maybeSingle();
+    .limit(1);
+
+  const profile = profiles?.[0];
 
   if (profile?.display_name?.trim()) {
     return profile.display_name.trim();
