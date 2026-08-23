@@ -9,6 +9,7 @@ import {
   GroupSummary,
 } from "@/components/groups/group-summary";
 import { MemberList } from "@/components/groups/member-list";
+import { ShareGroupButton } from "@/components/share/share-group-button";
 import { surfaceCardClass } from "@/components/ui/surface";
 import { getCurrentUser } from "@/lib/auth/session";
 import { getGroupBalances } from "@/lib/balances/queries";
@@ -53,24 +54,22 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            Balances
-          </h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+              Balances
+            </h2>
+            <ShareGroupButton
+              groupName={group.name}
+              summary={groupSummary}
+              expenses={expenses}
+              balances={balances}
+            />
+          </div>
           <BalanceSummary
             balances={balances}
             currentUserMemberId={currentUserMemberId}
             groupId={group.id}
             settleError={settle === "failed" ? "failed" : null}
-          />
-        </section>
-
-        <section className="space-y-3">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            Payment history
-          </h2>
-          <SettlementHistory
-            items={settlementHistory}
-            currentUserMemberId={currentUserMemberId}
           />
         </section>
 
@@ -92,6 +91,16 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
             groupId={group.id}
             members={group.members}
             currentUserId={user.id}
+          />
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+            Payment history
+          </h2>
+          <SettlementHistory
+            items={settlementHistory}
+            currentUserMemberId={currentUserMemberId}
           />
         </section>
 
