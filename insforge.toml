@@ -5,9 +5,9 @@ allowed_redirect_urls = [
   "http://localhost:3000/signup",
 
    # Production (Vercel)
-  "https://split-mate-xtinemariel.vercel.app/api/auth/callback",
-  "https://split-mate-xtinemariel.vercel.app/login",
-  "https://split-mate-xtinemariel.vercel.app/signup",
+  "https://abono-xtinemariel.vercel.app/api/auth/callback",
+  "https://abono-xtinemariel.vercel.app/login",
+  "https://abono-xtinemariel.vercel.app/signup",
 ]
 require_email_verification = false
 verify_email_method = "code"
