@@ -1,5 +1,6 @@
 import { formatCents } from "@/lib/expenses/money";
 import {
+  noticeClass,
   surfaceCardClass,
   surfaceListDivideClass,
 } from "@/components/ui/surface";
@@ -21,9 +22,9 @@ export function BalanceSummary({
   if (balances.length === 0) {
     return (
       <div className={surfaceCardClass("mint", "px-6 py-8 text-center")}>
-        <p className="text-sm font-medium text-foreground">All settled up</p>
+        <p className="text-sm font-medium text-foreground">Nothing to settle yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          No one owes anything right now.
+          Add an expense and we&apos;ll figure out who owes whom.
         </p>
       </div>
     );
@@ -32,14 +33,14 @@ export function BalanceSummary({
   return (
     <div className="space-y-3">
       {settleError ? (
-        <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
+        <p className={noticeClass.warning}>
           Could not settle up. Please try again.
         </p>
       ) : null}
 
       <ul
         className={surfaceCardClass(
-          "mint",
+          "neutral",
           cn("overflow-hidden", surfaceListDivideClass),
         )}
       >
@@ -48,10 +49,16 @@ export function BalanceSummary({
           const toIsYou = balance.toMemberId === currentUserMemberId;
 
           const sentence = fromIsYou
-            ? `You owe ${balance.toLabel} ${formatCents(balance.amountCents)}`
+            ? `You owe ${balance.toLabel}`
             : toIsYou
-              ? `${balance.fromLabel} owes you ${formatCents(balance.amountCents)}`
-              : `${balance.fromLabel} owes ${balance.toLabel} ${formatCents(balance.amountCents)}`;
+              ? `${balance.fromLabel} owes you`
+              : `${balance.fromLabel} owes ${balance.toLabel}`;
+
+          const amountClass = fromIsYou
+            ? "text-owe"
+            : toIsYou
+              ? "text-owed"
+              : "text-foreground";
 
           return (
             <li
@@ -59,7 +66,17 @@ export function BalanceSummary({
               className="px-4 py-4"
             >
               <div className="space-y-3">
-                <p className="text-sm text-foreground">{sentence}</p>
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-sm text-foreground">{sentence}</p>
+                  <p
+                    className={cn(
+                      "shrink-0 text-sm font-semibold tabular-nums",
+                      amountClass,
+                    )}
+                  >
+                    {formatCents(balance.amountCents)}
+                  </p>
+                </div>
 
                 <form action={settleUp} className="flex justify-end">
                   <input type="hidden" name="groupId" value={groupId} />
@@ -80,7 +97,7 @@ export function BalanceSummary({
                   />
                   <button
                     type="submit"
-                    className="inline-flex h-9 items-center rounded-lg border border-border bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
+                    className="inline-flex h-8 items-center rounded-lg border border-border bg-transparent px-2.5 text-xs font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-muted hover:text-foreground"
                   >
                     Mark as paid
                   </button>

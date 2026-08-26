@@ -22,7 +22,7 @@ export default async function HomePage() {
             {user ? (
               <Link
                 href="/app"
-                className="inline-flex h-11 items-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-primary/90"
+                className="inline-flex h-11 items-center rounded-xl bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#455C4D]"
               >
                 Open app
               </Link>
@@ -30,13 +30,13 @@ export default async function HomePage() {
               <>
                 <Link
                   href="/login"
-                  className="inline-flex h-11 items-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-primary/90"
+                  className="inline-flex h-11 items-center rounded-xl bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#455C4D]"
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/signup"
-                  className="inline-flex h-11 items-center rounded-lg bg-secondary px-5 text-sm font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
+                  className="inline-flex h-11 items-center rounded-xl bg-secondary px-5 text-sm font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#DFD5C6]"
                 >
                   Create account
                 </Link>
@@ -46,7 +46,7 @@ export default async function HomePage() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-          <div className={surfaceCardClass("lavender", "p-5")}>
+          <div className={surfaceCardClass("sage", "p-5")}>
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
               Pay first
             </p>

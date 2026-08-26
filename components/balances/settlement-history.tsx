@@ -32,10 +32,10 @@ export function SettlementHistory({
 }) {
   if (items.length === 0) {
     return (
-      <div className={surfaceCardClass("blue", "px-6 py-8 text-center")}>
+      <div className={surfaceCardClass("neutral", "px-6 py-8 text-center")}>
         <p className="text-sm font-medium text-foreground">No payments yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
-        Payments you mark as paid will show up here.
+          Settlements will land here once everyone pays back.
         </p>
       </div>
     );
@@ -44,7 +44,7 @@ export function SettlementHistory({
   return (
     <ul
       className={surfaceCardClass(
-        "blue",
+        "neutral",
         cn("overflow-hidden", surfaceListDivideClass),
       )}
     >

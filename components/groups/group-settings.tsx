@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+  fieldErrorClass,
+  fieldSuccessClass,
+} from "@/components/ui/surface";
+import {
   deleteGroup,
   renameGroup,
   type GroupFormState,
@@ -114,10 +118,10 @@ export function GroupSettings({
             </Button>
           </div>
           {renameState.error ? (
-            <p className="text-xs text-[#8A6A00]">{renameState.error}</p>
+            <p className={fieldErrorClass}>{renameState.error}</p>
           ) : null}
           {renameState.success ? (
-            <p className="text-xs text-[#2E6B51]">{renameState.success}</p>
+            <p className={fieldSuccessClass}>{renameState.success}</p>
           ) : null}
         </form>
       ) : (
@@ -136,9 +140,9 @@ export function GroupSettings({
           <form onSubmit={handleDeleteSubmit}>
             <Button
               type="submit"
-              variant="secondary"
+              variant="destructive"
               disabled={deletePending}
-              className="h-9 w-auto px-3 text-xs text-[#A46A78] hover:text-[#8E5964]"
+              className="h-9 w-auto px-3 text-xs"
             >
               {deletePending ? "Deleting..." : "Delete group"}
             </Button>
@@ -147,7 +151,7 @@ export function GroupSettings({
       )}
 
       {deleteState.error ? (
-        <p className="text-xs text-[#8A6A00]">{deleteState.error}</p>
+        <p className={fieldErrorClass}>{deleteState.error}</p>
       ) : null}
 
       {!isEditing ? (

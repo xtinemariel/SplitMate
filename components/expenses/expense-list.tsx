@@ -24,10 +24,10 @@ export function ExpenseList({
 }) {
   if (expenses.length === 0) {
     return (
-      <div className={surfaceCardClass("lavender", "px-6 py-8 text-center")}>
+      <div className={surfaceCardClass("neutral", "px-6 py-8 text-center")}>
         <p className="text-sm font-medium text-foreground">No expenses yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Add your first expense below.
+          Add your first expense and we&apos;ll handle the math.
         </p>
       </div>
     );
@@ -36,7 +36,7 @@ export function ExpenseList({
   return (
     <ul
       className={surfaceCardClass(
-        "lavender",
+        "neutral",
         cn("overflow-hidden", surfaceListDivideClass),
       )}
     >
@@ -56,12 +56,12 @@ export function ExpenseList({
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-end gap-2">
-              <p className="text-sm font-semibold text-foreground">
+              <p className="text-sm font-semibold tabular-nums text-foreground">
                 {expense.formatted_amount}
               </p>
               <Link
                 href={`/app/groups/${groupId}/expenses/${expense.id}/edit`}
-                className="inline-flex h-8 items-center rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-accent hover:text-accent-foreground"
+                className="inline-flex h-8 items-center rounded-lg border border-border bg-transparent px-2.5 text-xs font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-muted hover:text-foreground"
               >
                 Edit
               </Link>

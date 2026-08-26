@@ -5,6 +5,10 @@ import { startTransition, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  fieldErrorClass,
+  noticeClass,
+} from "@/components/ui/surface";
 import { parseAmountToCents } from "@/lib/expenses/money";
 import type { ExpenseFormState } from "@/lib/expenses/actions";
 import type { GroupMemberWithLabel } from "@/lib/groups/queries";
@@ -414,7 +418,7 @@ export function ExpenseForm({
             required
           />
           {touched.amount && errors.amount ? (
-            <p className="text-xs text-[#8A6A00]">{errors.amount}</p>
+            <p className={fieldErrorClass}>{errors.amount}</p>
           ) : null}
         </div>
         <div className="space-y-2">
@@ -431,7 +435,7 @@ export function ExpenseForm({
             required
           />
           {touched.expenseDate && errors.expenseDate ? (
-            <p className="text-xs text-[#8A6A00]">{errors.expenseDate}</p>
+            <p className={fieldErrorClass}>{errors.expenseDate}</p>
           ) : null}
         </div>
       </div>
@@ -450,7 +454,7 @@ export function ExpenseForm({
           required
         />
         {touched.description && errors.description ? (
-          <p className="text-xs text-[#8A6A00]">{errors.description}</p>
+          <p className={fieldErrorClass}>{errors.description}</p>
         ) : null}
       </div>
 
@@ -462,7 +466,7 @@ export function ExpenseForm({
           value={values.paidByGroupMemberId}
           onChange={(event) => handlePaidByChange(event.target.value)}
           onBlur={handlePaidByBlur}
-          className="h-11 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="h-11 w-full rounded-xl border border-border bg-card px-3 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           required
         >
           {members.map((member) => (
@@ -472,7 +476,7 @@ export function ExpenseForm({
           ))}
         </select>
         {touched.paidByGroupMemberId && errors.paidByGroupMemberId ? (
-          <p className="text-xs text-[#8A6A00]">{errors.paidByGroupMemberId}</p>
+          <p className={fieldErrorClass}>{errors.paidByGroupMemberId}</p>
         ) : null}
       </div>
 
@@ -482,7 +486,7 @@ export function ExpenseForm({
           <button
             type="button"
             onClick={toggleAllParticipants}
-            className="rounded-full bg-[#F4F1FF] px-3 py-1 text-xs font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#ECE8FF] hover:text-foreground"
+            className="rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#E9E1D5] hover:text-foreground"
           >
             {allSelected ? "Clear all" : "Select all"}
           </button>
@@ -494,7 +498,7 @@ export function ExpenseForm({
 
             return (
               <li key={member.id}>
-                <label className="flex cursor-pointer items-center gap-3 rounded-[18px] bg-[#FFFDF8] px-4 py-3 shadow-[0_8px_20px_rgba(106,109,130,0.06)] transition-colors hover:bg-[#F4F1FF] has-[:checked]:bg-[#F4F1FF] has-[:checked]:text-[#433569]">
+                <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 transition-colors hover:bg-muted has-[:checked]:border-[#C9D4C8] has-[:checked]:bg-[#E8EEE7] has-[:checked]:text-accent-foreground">
                   <input
                     type="checkbox"
                     name="participants"
@@ -513,20 +517,16 @@ export function ExpenseForm({
           Split equally among selected members.
         </p>
         {touched.participants && errors.participants ? (
-          <p className="text-xs text-[#8A6A00]">{errors.participants}</p>
+          <p className={fieldErrorClass}>{errors.participants}</p>
         ) : null}
       </div>
 
       {state.error ? (
-        <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
-          {state.error}
-        </p>
+        <p className={noticeClass.warning}>{state.error}</p>
       ) : null}
 
       {state.success ? (
-        <p className="rounded-[18px] bg-[#ECFDF5] px-3 py-2 text-sm text-[#2E6B51]">
-          {state.success}
-        </p>
+        <p className={noticeClass.success}>{state.success}</p>
       ) : null}
 
       <Button

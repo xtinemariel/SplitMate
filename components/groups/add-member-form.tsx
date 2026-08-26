@@ -5,6 +5,7 @@ import { useActionState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { noticeClass } from "@/components/ui/surface";
 import { addMemberByName, type GroupFormState } from "@/lib/groups/actions";
 
 const initialState: GroupFormState = {};
@@ -41,15 +42,11 @@ export function AddMemberForm({ groupId }: { groupId: string }) {
       </div>
 
       {state.error ? (
-        <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
-          {state.error}
-        </p>
+        <p className={noticeClass.warning}>{state.error}</p>
       ) : null}
 
       {state.success ? (
-        <p className="rounded-[18px] bg-[#ECFDF5] px-3 py-2 text-sm text-[#2E6B51]">
-          {state.success}
-        </p>
+        <p className={noticeClass.success}>{state.success}</p>
       ) : null}
 
       <Button type="submit" disabled={pending}>

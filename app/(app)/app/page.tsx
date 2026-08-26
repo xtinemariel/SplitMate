@@ -34,21 +34,21 @@ export default async function GroupsPage() {
           {groups.length > 0 ? (
             <Link
               href="/app/groups/new"
-              className="inline-flex h-10 shrink-0 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-primary/90"
+              className="inline-flex h-10 shrink-0 items-center rounded-xl bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-[#455C4D]"
             >
               New
             </Link>
           ) : null}
         </div>
 
-        <div className={surfaceCardClass("mint", "mb-4 p-4") }>
+        <div className={surfaceCardClass("sage", "mb-4 p-4")}>
           <p className="text-sm font-medium text-foreground">
             {groups.length === 0
-              ? "Create a group to track what you paid for everyone."
+              ? "I've got this — create a group and start tracking."
               : `${groups.length} active group${groups.length === 1 ? "" : "s"}`}
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Everything the group spent, tracked in one place.
+            Everything the group spent, kept tidy in one place.
           </p>
         </div>
 

@@ -5,6 +5,10 @@ import { startTransition, useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+  destructiveTextClass,
+  fieldErrorClass,
+} from "@/components/ui/surface";
+import {
   deleteMember,
   editMemberName,
   type MemberFormState,
@@ -105,7 +109,7 @@ export function MemberRow({
                 </Button>
               </div>
               {editState.error ? (
-                <p className="text-xs text-[#8A6A00]">{editState.error}</p>
+                <p className={fieldErrorClass}>{editState.error}</p>
               ) : null}
             </form>
           ) : (
@@ -121,7 +125,7 @@ export function MemberRow({
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-medium capitalize text-accent-foreground">
+          <span className="rounded-full border border-border bg-muted px-2.5 py-1 text-xs font-medium capitalize text-muted-foreground">
             {member.role}
           </span>
           {!isEditing ? (
@@ -142,7 +146,7 @@ export function MemberRow({
                   type="submit"
                   variant="secondary"
                   disabled={deletePending}
-                  className="h-8 w-auto px-3 text-xs text-[#A46A78] hover:text-[#8E5964]"
+                  className={`h-8 w-auto px-3 text-xs ${destructiveTextClass}`}
                 >
                   {deletePending ? "Removing..." : "Delete"}
                 </Button>
@@ -153,7 +157,7 @@ export function MemberRow({
       </div>
 
       {deleteState.error ? (
-        <p className="mt-2 text-xs text-[#8A6A00]">{deleteState.error}</p>
+        <p className={`mt-2 ${fieldErrorClass}`}>{deleteState.error}</p>
       ) : null}
     </li>
   );

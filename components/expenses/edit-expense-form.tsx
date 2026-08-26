@@ -4,6 +4,7 @@ import { startTransition, useActionState } from "react";
 
 import { ExpenseForm } from "@/components/expenses/expense-form";
 import { Button } from "@/components/ui/button";
+import { fieldErrorClass } from "@/components/ui/surface";
 import {
   deleteExpense,
   updateExpense,
@@ -102,14 +103,13 @@ function DeleteExpenseForm({
     <form className="space-y-2" onSubmit={handleSubmit}>
       <Button
         type="submit"
-        variant="secondary"
+        variant="destructive"
         disabled={pending}
-        className="text-[#A46A78] hover:text-[#8E5964]"
       >
         {pending ? "Deleting..." : "Delete expense"}
       </Button>
       {state.error ? (
-        <p className="text-xs text-[#8A6A00]">{state.error}</p>
+        <p className={fieldErrorClass}>{state.error}</p>
       ) : null}
     </form>
   );

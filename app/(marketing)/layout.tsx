@@ -18,7 +18,7 @@ export default async function MarketingLayout({
 
   return (
     <div className="flex min-h-full flex-col bg-background text-foreground">
-      <header className="bg-background/90 backdrop-blur">
+      <header className="border-b border-border/70 bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
           <Link
             href="/"

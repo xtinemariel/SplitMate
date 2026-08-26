@@ -53,7 +53,11 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
             Group summary
           </h2>
-          <GroupSummary summary={groupSummary} />
+          <GroupSummary
+            summary={groupSummary}
+            currentUserMemberId={currentUserMemberId}
+            balances={balances}
+          />
         </section>
 
         <section className="space-y-3">

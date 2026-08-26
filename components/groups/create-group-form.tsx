@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { noticeClass } from "@/components/ui/surface";
 import {
   createGroup,
   type GroupFormState,
@@ -43,9 +44,7 @@ export function CreateGroupForm() {
         </div>
 
         {state.error ? (
-          <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
-            {state.error}
-          </p>
+          <p className={noticeClass.warning}>{state.error}</p>
         ) : null}
 
         <Button type="submit" disabled={pending}>

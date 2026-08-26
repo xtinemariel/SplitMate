@@ -8,6 +8,7 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { noticeClass } from "@/components/ui/surface";
 import {
   signInWithEmail,
   type AuthFormState,
@@ -45,7 +46,7 @@ export function LoginForm({
         <GoogleSignInButton />
 
         <div className="flex items-center justify-center">
-          <span className="rounded-full bg-[#F4F1FF] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+          <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
             or
           </span>
         </div>
@@ -78,9 +79,7 @@ export function LoginForm({
           </div>
 
           {error ? (
-            <p className="rounded-[18px] bg-[#FFF8DB] px-3 py-2 text-sm text-[#8A6A00]">
-              {error}
-            </p>
+            <p className={noticeClass.warning}>{error}</p>
           ) : null}
 
           <Button type="submit" disabled={pending}>

@@ -1,5 +1,6 @@
 import { formatCents } from "@/lib/expenses/money";
 import type { ExpenseWithMeta } from "@/lib/expenses/queries";
+import type { BalanceLine } from "@/lib/balances/queries";
 import type { GroupMemberWithLabel } from "@/lib/groups/queries";
 import {
   surfaceCardClass,
@@ -56,40 +57,81 @@ export function buildGroupExpenseSummary(
 
 export function GroupSummary({
   summary,
+  currentUserMemberId,
+  balances,
 }: {
   summary: GroupExpenseSummary;
+  currentUserMemberId?: string;
+  balances?: BalanceLine[];
 }) {
-  return (
-    <div className={surfaceCardClass("lavender", "overflow-hidden")}>
-      <div className="px-4 py-4">
-        <p className="text-2xl font-semibold tracking-tight text-foreground">
-          {formatCents(summary.totalCents)}
-        </p>
-        <p className="mt-1 text-sm text-muted-foreground">Total expenses</p>
-      </div>
+  const youvePaidCents = currentUserMemberId
+    ? (summary.paidBy.find((m) => m.memberId === currentUserMemberId)
+        ?.amountCents ?? 0)
+    : 0;
 
-      {summary.paidBy.length > 0 ? (
-        <div className="border-t border-[rgba(106,109,130,0.12)]">
-          <p className="px-4 pt-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            Paid by
-          </p>
-          <ul className={cn(surfaceListDivideClass)}>
-            {summary.paidBy.map((member) => (
-              <li
-                key={member.memberId}
-                className="flex items-center justify-between gap-4 px-4 py-3"
-              >
-                <p className="min-w-0 truncate text-sm text-foreground">
-                  {member.label}
-                </p>
-                <p className="shrink-0 text-sm font-semibold tabular-nums text-foreground">
-                  {formatCents(member.amountCents)}
-                </p>
-              </li>
-            ))}
-          </ul>
+  const toCollectCents =
+    currentUserMemberId && balances
+      ? balances
+          .filter((b) => b.toMemberId === currentUserMemberId)
+          .reduce((sum, b) => sum + b.amountCents, 0)
+      : 0;
+
+  const showPersonal = Boolean(currentUserMemberId);
+
+  return (
+    <div className="space-y-3">
+      {showPersonal ? (
+        <div className="grid grid-cols-2 gap-3">
+          <div className={surfaceCardClass("mint", "px-4 py-4")}>
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              You&apos;ve paid
+            </p>
+            <p className="mt-2 text-xl font-semibold tracking-tight text-owed tabular-nums">
+              {formatCents(youvePaidCents)}
+            </p>
+          </div>
+          <div className={surfaceCardClass("peach", "px-4 py-4")}>
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              To collect
+            </p>
+            <p className="mt-2 text-xl font-semibold tracking-tight text-owed tabular-nums">
+              {formatCents(toCollectCents)}
+            </p>
+          </div>
         </div>
       ) : null}
+
+      <div className={surfaceCardClass("neutral", "overflow-hidden")}>
+        <div className="px-4 py-4">
+          <p className="text-2xl font-semibold tracking-tight text-foreground tabular-nums">
+            {formatCents(summary.totalCents)}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">Group total</p>
+        </div>
+
+        {summary.paidBy.length > 0 ? (
+          <div className="border-t border-[#E0D8CC]">
+            <p className="px-4 pt-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              Paid by
+            </p>
+            <ul className={cn(surfaceListDivideClass)}>
+              {summary.paidBy.map((member) => (
+                <li
+                  key={member.memberId}
+                  className="flex items-center justify-between gap-4 px-4 py-3"
+                >
+                  <p className="min-w-0 truncate text-sm text-foreground">
+                    {member.label}
+                  </p>
+                  <p className="shrink-0 text-sm font-semibold tabular-nums text-foreground">
+                    {formatCents(member.amountCents)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export function AuthShell({
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-16">
       <div className="mx-auto w-full max-w-sm space-y-4">
-        <div className={surfaceCardClass("blue", "p-6")}>
+        <div className={surfaceCardClass("sage", "p-6")}>
           <div className="text-center">
             <Link
               href="/"
