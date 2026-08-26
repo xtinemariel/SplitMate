@@ -9,6 +9,7 @@ import {
   GroupSummary,
 } from "@/components/groups/group-summary";
 import { MemberList } from "@/components/groups/member-list";
+import { GroupSettings } from "@/components/groups/group-settings";
 import { ShareGroupButton } from "@/components/share/share-group-button";
 import { surfaceCardClass } from "@/components/ui/surface";
 import { getCurrentUser } from "@/lib/auth/session";
@@ -39,7 +40,9 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
     getGroupBalances(id, group.members),
     getSettlementHistory(id, group.members),
   ]);
-  const currentUserMemberId = group.members.find((member) => member.user_id === user.id)?.id ?? "";
+  const currentUserMember = group.members.find((member) => member.user_id === user.id);
+  const currentUserMemberId = currentUserMember?.id ?? "";
+  const isAdmin = currentUserMember?.role === "admin";
   const groupSummary = buildGroupExpenseSummary(group.members, expenses);
 
   return (
@@ -119,6 +122,18 @@ export default async function GroupPage({ params, searchParams }: GroupPageProps
           <h2 className="text-sm font-medium text-foreground">Add someone</h2>
           <AddMemberForm groupId={group.id} />
         </section>
+
+        {isAdmin ? (
+          <section className={surfaceCardClass("neutral", "space-y-4 p-4")}>
+            <div>
+              <h2 className="text-sm font-medium text-foreground">Group settings</h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Rename or delete this group. Only admins can do this.
+              </p>
+            </div>
+            <GroupSettings groupId={group.id} groupName={group.name} />
+          </section>
+        ) : null}
       </main>
     </>
   );

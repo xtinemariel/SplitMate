@@ -172,3 +172,85 @@ export async function deleteMember(
 
   return { success: "Member removed." };
 }
+
+export async function renameGroup(
+  _previousState: GroupFormState,
+  formData: FormData,
+): Promise<GroupFormState> {
+  await requireUser();
+
+  const groupId = String(formData.get("groupId") ?? "").trim();
+  const name = String(formData.get("name") ?? "").trim();
+
+  if (!groupId) {
+    return { error: "Group is required." };
+  }
+
+  if (!name) {
+    return { error: "Group name is required." };
+  }
+
+  if (name.length > 80) {
+    return { error: "Group name must be 80 characters or less." };
+  }
+
+  const insforge = await createInsForgeServerClient();
+  const { data, error } = await insforge.database.rpc("update_group_name", {
+    p_group_id: groupId,
+    p_name: name,
+  });
+
+  if (error) {
+    const message = error.message ?? "Could not rename group.";
+
+    if (message.toLowerCase().includes("only group admins")) {
+      return { error: "Only group admins can rename this group." };
+    }
+
+    return { error: message };
+  }
+
+  if (!data) {
+    return { error: "Could not rename group." };
+  }
+
+  revalidatePath("/app");
+  revalidatePath(`/app/groups/${groupId}`);
+
+  return { success: "Group renamed." };
+}
+
+export async function deleteGroup(
+  _previousState: GroupFormState,
+  formData: FormData,
+): Promise<GroupFormState> {
+  await requireUser();
+
+  const groupId = String(formData.get("groupId") ?? "").trim();
+
+  if (!groupId) {
+    return { error: "Group is required." };
+  }
+
+  const insforge = await createInsForgeServerClient();
+  const { data, error } = await insforge.database.rpc("delete_group", {
+    p_group_id: groupId,
+  });
+
+  if (error) {
+    const message = error.message ?? "Could not delete group.";
+
+    if (message.toLowerCase().includes("only group admins")) {
+      return { error: "Only group admins can delete this group." };
+    }
+
+    return { error: message };
+  }
+
+  if (!data) {
+    return { error: "Could not delete group." };
+  }
+
+  revalidatePath("/app");
+  redirect("/app");
+}
