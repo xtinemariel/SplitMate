@@ -77,7 +77,7 @@ export function SignUpForm() {
   return (
     <AuthShell
       title="Create account"
-      description="Start splitting expenses with friends."
+      description="For the one who always pays first."
       footer={
         <>
           Already have an account?{" "}

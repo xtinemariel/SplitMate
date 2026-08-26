@@ -26,7 +26,7 @@ export function AppHeader({
               href="/app"
               className="text-sm font-semibold tracking-tight text-foreground"
             >
-              SplitMate
+              Abono
             </Link>
           )}
           {title ? (

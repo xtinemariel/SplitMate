@@ -15,10 +15,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "SplitMate",
-    template: "%s | SplitMate",
+    default: "Abono",
+    template: "%s | Abono",
   },
-  description: "Split expenses with the fewest taps possible.",
+  description:
+    "For the one who always pays first. The designated treasurer of the group.",
 };
 
 export default function RootLayout({

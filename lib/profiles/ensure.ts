@@ -13,7 +13,7 @@ export async function ensureProfile(user: AuthUser) {
   const displayName =
     user.profile?.name?.trim() ||
     user.email?.split("@")[0] ||
-    "SplitMate user";
+    "Abono user";
 
   await insforge.database.from("profiles").upsert([
     {

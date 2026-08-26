@@ -28,7 +28,7 @@ export default async function GroupsPage() {
               Groups
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Your shared expense groups
+              Groups you front for
             </p>
           </div>
           {groups.length > 0 ? (
@@ -44,11 +44,11 @@ export default async function GroupsPage() {
         <div className={surfaceCardClass("mint", "mb-4 p-4") }>
           <p className="text-sm font-medium text-foreground">
             {groups.length === 0
-              ? "Create a group to track shared expenses with friends, family, or colleagues."
+              ? "Create a group to track what you paid for everyone."
               : `${groups.length} active group${groups.length === 1 ? "" : "s"}`}
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Everything you split together, all in one group.
+            Everything the group spent, tracked in one place.
           </p>
         </div>
 

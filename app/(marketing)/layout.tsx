@@ -4,8 +4,9 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
 
 export const metadata: Metadata = {
-  title: "SplitMate",
-  description: "Split expenses with the fewest taps possible.",
+  title: "Abono",
+  description:
+    "For the one who always pays first. The designated treasurer of the group.",
 };
 
 export default async function MarketingLayout({
@@ -23,7 +24,7 @@ export default async function MarketingLayout({
             href="/"
             className="text-sm font-semibold tracking-tight text-foreground"
           >
-            SplitMate
+            Abono
           </Link>
           {user ? (
             <Link

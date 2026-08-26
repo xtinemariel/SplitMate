@@ -31,7 +31,7 @@ export function LoginForm({
   return (
     <AuthShell
       title="Sign in"
-      description="Welcome back. Split expenses in seconds."
+      description="Welcome back. Keep the group settled."
       footer={
         <>
           Don&apos;t have an account?{" "}

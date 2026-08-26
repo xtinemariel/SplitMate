@@ -22,7 +22,7 @@ export function AuthShell({
               href="/"
               className="text-sm font-semibold tracking-tight text-foreground"
             >
-              SplitMate
+              Abono
             </Link>
             <h1 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
               {title}

@@ -17,7 +17,7 @@ export function GroupList({ groups }: { groups: GroupSummary[] }) {
       <div className={surfaceCardClass("peach", "px-6 py-10 text-center")}>
         <p className="text-sm font-medium text-foreground">No groups yet</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Create a group to start splitting expenses with friends.
+          Create a group to track what you fronted for everyone.
         </p>
         <Link
           href="/app/groups/new"
